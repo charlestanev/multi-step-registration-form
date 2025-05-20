@@ -15,7 +15,6 @@ interface StepOneData {
 export default function RegistrationForm() {
     const [step, setStep] = useState(1); // Current form step 
     const [formData, setFormData] = useState<StepOneData | null>(null); // Data from Step One 
-    const [avatar, setAvatar] = useState<File | null>(null); // Uploaded avatar 
     const toast = useToast();
 
     // Called when Step One is completed successfully 
@@ -46,7 +45,6 @@ export default function RegistrationForm() {
             // Reset state after submission 
             setStep(1);
             setFormData(null);
-            setAvatar(null);
         } catch (err) {
             toast({
                 title: "Error submitting form",
