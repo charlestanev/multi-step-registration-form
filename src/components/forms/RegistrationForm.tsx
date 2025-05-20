@@ -1,7 +1,8 @@
+import { Box, Heading, Flex, IconButton, useColorMode, useToast } from "@chakra-ui/react";
+import { Moon, Sun } from "lucide-react";
 import { useState } from "react";
 import StepOne from "./StepOne";
 import StepTwo from "./StepTwo";
-import { Box, Heading, useToast } from "@chakra-ui/react";
 import axios from "axios";
 
 // Define the shape of data coming from Step One
@@ -16,6 +17,7 @@ export default function RegistrationForm() {
     const [step, setStep] = useState(1); // Current form step 
     const [formData, setFormData] = useState<StepOneData | null>(null); // Data from Step One 
     const toast = useToast();
+    const { colorMode, toggleColorMode } = useColorMode();
 
     // Called when Step One is completed successfully 
     const handleStepOneSubmit = (data: StepOneData) => {
@@ -56,11 +58,35 @@ export default function RegistrationForm() {
     };
 
     return (
-        <Box p={4}>
-            <Heading size="md" mb={4}>User Registration</Heading>
+        <Flex
+            minHeight="100vh"
+            width="100vw"
+            align="center"
+            justify="center"
+            px={4}
+        >
+            <Box
+                p={{ base: 4, md: 6 }}
+                maxW={{ base: "100%", md: "500px" }}
+                w="100%"
+                borderRadius="lg"
+                boxShadow="lg"
+                bg="white"
+                _dark={{ bg: "gray.800" }}
+            >
+                <Flex justify="space-between" align="center" mb={6}>
+                    <Heading size="lg">User Registration</Heading>
+                    <IconButton
+                        aria-label="Toggle theme"
+                        icon={colorMode === "light" ? <Moon size={18} /> : <Sun size={18} />}
+                        onClick={toggleColorMode}
+                        variant="ghost"
+                    />
+                </Flex>
 
-            {step === 1 && <StepOne onNext={handleStepOneSubmit} />}
-            {step === 2 && <StepTwo onSubmit={handleFinalSubmit} />}
-        </Box>
+                {step === 1 && <StepOne onNext={handleStepOneSubmit} />}
+                {step === 2 && <StepTwo onSubmit={handleFinalSubmit} />}
+            </Box>
+        </Flex>
     );
 }

@@ -39,13 +39,35 @@ export default function StepTwo({ onSubmit }: Props) {
             <form onSubmit={handleSubmit}>
                 <FormControl isInvalid={!!error} mb={4}>
                     <FormLabel>Upload Avatar</FormLabel>
-                    <Input type="file" accept="image/*" onChange={handleFileChange} />
+                    <Input
+                        type="file"
+                        accept="image/*"
+                        onChange={handleFileChange}
+                        variant="unstyled"
+                        w="100%"
+                        px={3}
+                        py={2}
+                        bg="gray.700"
+                        _dark={{ bg: "gray.700" }}
+                        color="white"
+                        _hover={{ cursor: "pointer", bg: "gray.600" }}
+                        _focus={{ outline: "none" }}
+                        borderRadius="md"
+                    />
                     <FormErrorMessage>{error}</FormErrorMessage>
                 </FormControl>
 
                 {previewUrl && (
-                    <Box mb={4}>
-                        <Image src={previewUrl} alt="Preview" maxH="200px" />
+                    <Box my={4} display="flex" justifyContent="center">
+                        <Image
+                            src={previewUrl}
+                            alt="Preview"
+                            objectFit="cover"
+                            maxW="100%"
+                            maxH="300px"
+                            borderRadius="md"
+                            boxShadow="md"
+                        />
                     </Box>
                 )}
 

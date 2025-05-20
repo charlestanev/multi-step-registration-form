@@ -11,8 +11,8 @@ const theme = extendTheme({
     config,
     styles: {
         global: {
-            body: {
-                bg: "gray.50",
+            "html, body": {
+                bg: "gray.100",
                 color: "gray.800",
                 _dark: {
                     bg: "gray.900",
