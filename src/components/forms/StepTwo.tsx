@@ -1,4 +1,5 @@
-import { Box, Button, FormControl, FormLabel, Input, Image, FormErrorMessage } from "@chakra-ui/react";
+import { Box, Button, FormControl, FormLabel, Input, FormErrorMessage } from "@chakra-ui/react";
+import { motion } from "framer-motion";
 import { useState } from "react";
 
 interface Props {
@@ -59,14 +60,13 @@ export default function StepTwo({ onSubmit }: Props) {
 
                 {previewUrl && (
                     <Box my={4} display="flex" justifyContent="center">
-                        <Image
+                        <motion.img
                             src={previewUrl}
                             alt="Preview"
-                            objectFit="cover"
-                            maxW="100%"
-                            maxH="300px"
-                            borderRadius="md"
-                            boxShadow="md"
+                            style={{ borderRadius: "8px", maxWidth: "100%", maxHeight: "300px", boxShadow: "var(--chakra-shadows-md)" }}
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.4 }}
                         />
                     </Box>
                 )}

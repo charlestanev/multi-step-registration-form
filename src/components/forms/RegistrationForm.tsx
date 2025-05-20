@@ -1,9 +1,20 @@
-import { Box, Heading, Flex, IconButton, useColorMode, useToast } from "@chakra-ui/react";
+import {
+    Box,
+    Heading,
+    Flex,
+    IconButton,
+    useColorMode,
+    useToast,
+} from "@chakra-ui/react";
 import { Moon, Sun } from "lucide-react";
 import { useState } from "react";
 import StepOne from "./StepOne";
 import StepTwo from "./StepTwo";
 import axios from "axios";
+import { motion } from "framer-motion";
+
+// Chakra + motion integration
+const MotionBox = motion(Box);
 
 // Define the shape of data coming from Step One
 interface StepOneData {
@@ -42,6 +53,7 @@ export default function RegistrationForm() {
                 status: "success",
                 duration: 3000,
                 isClosable: true,
+                position: "top",
             });
 
             // Reset state after submission 
@@ -65,7 +77,10 @@ export default function RegistrationForm() {
             justify="center"
             px={4}
         >
-            <Box
+            <MotionBox
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.4 }}
                 p={{ base: 4, md: 6 }}
                 maxW={{ base: "100%", md: "500px" }}
                 w="100%"
@@ -86,7 +101,7 @@ export default function RegistrationForm() {
 
                 {step === 1 && <StepOne onNext={handleStepOneSubmit} />}
                 {step === 2 && <StepTwo onSubmit={handleFinalSubmit} />}
-            </Box>
+            </MotionBox>
         </Flex>
     );
 }
