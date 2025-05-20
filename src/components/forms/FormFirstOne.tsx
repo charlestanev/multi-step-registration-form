@@ -1,13 +1,13 @@
 import {
-    Box,
-    Button,
-    Checkbox,
+    box,
+    button,
+    checkbox,
     CheckboxGroup,
     FormControl,
-    FormLabel,
-    Input,
-    Stack,
     FormErrorMessage,
+    FormLabel,
+    input,
+    Stack
 } from '@chakra-ui/react';
 
 import { useEffect, useState } from 'react';
@@ -100,30 +100,32 @@ export default function FormFirstOne({ onNext }: Props) {
                         control={control}
                         name="interests"
                         render={({ field }) => (
-                            <CheckboxGroup {...field}>
-                                <Stack spacing={2}>
-                                    {interestOptions.map((interest) => (
-                                        <Checkbox
-                                            key={interest}
-                                            value={interest}
-                                            isChecked={field.value?.includes(interest)}
-                                            onChange={(e) => {
-                                                const checked = e.target.checked;
-                                                const value = e.target.value;
+                            <CheckboxGroup value={field.value} onChange={field.onChange}>
+                                <div>
+                                    <Stack spacing={2}>
+                                        {interestOptions.map((interest) => (
+                                            <Checkbox
+                                                key={interest}
+                                                value={interest}
+                                                isChecked={field.value?.includes(interest)}
+                                                onChange={(e) => {
+                                                    const checked = e.target.checked;
+                                                    const value = e.target.value;
 
-                                                if (checked) {
-                                                    if (field.value.length < 2) {
-                                                        field.onChange([...field.value, value]);
+                                                    if (checked) {
+                                                        if (field.value.length < 2) {
+                                                            field.onChange([...field.value, value]);
+                                                        }
+                                                    } else {
+                                                        field.onChange(field.value.filter((v: string) => v !== value));
                                                     }
-                                                } else {
-                                                    field.onChange(field.value.filter((v: string) => v !== value));
-                                                }
-                                            }}
-                                        >
-                                            {interest}
-                                        </Checkbox>
-                                    ))}
-                                </Stack>
+                                                }}
+                                            >
+                                                {interest}
+                                            </Checkbox>
+                                        ))}
+                                    </Stack>
+                                </div>
                             </CheckboxGroup>
                         )}
                     />
