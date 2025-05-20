@@ -1,25 +1,37 @@
 {
   "interests": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Sports"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Music"
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Art"
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "Technology"
     },
     {
-      "id": 5,
+      "id": "5",
       "name": "Travel"
     }
   ],
-  "registrations": []
+  "registrations": [
+    {
+      "id": "df54",
+      "name": "Elmir Tanev",
+      "password": "7654321чуътревя",
+      "confirmPassword": "7654321чуътревя",
+      "interests": [
+        "Sports",
+        "Technology"
+      ],
+      "avatar": "drawing.png"
+    }
+  ]
 }

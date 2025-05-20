@@ -1,12 +1,12 @@
 import {
-    box,
-    button,
-    checkbox,
+    Box,
+    Button,
+    Checkbox,
     CheckboxGroup,
     FormControl,
     FormErrorMessage,
     FormLabel,
-    input,
+    Input,
     Stack
 } from '@chakra-ui/react';
 

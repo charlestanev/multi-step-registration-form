@@ -1,18 +1,13 @@
-import './App.css'
 import { ChakraProvider } from "@chakra-ui/react";
-import FormFirstOne from './components/forms/FormFirstOne';
+import RegistrationForm from "./components/forms/RegistrationForm";
 
+// Main App component
 function App() {
-  const handleNext = (data: any) => {
-    console.log("Data:", data);
-  };
-
   return (
-    <>
-      <FormFirstOne onNext={handleNext} />
-    </>
+    <ChakraProvider>
+      <RegistrationForm />
+    </ChakraProvider>
   );
-
 }
 
-export default App
+export default App;
