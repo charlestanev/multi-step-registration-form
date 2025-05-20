@@ -7,14 +7,16 @@ import {
     useToast,
 } from "@chakra-ui/react";
 import { Moon, Sun } from "lucide-react";
-import { useState } from "react";
-import StepOne from "./StepOne";
-import StepTwo from "./StepTwo";
+import { lazy, Suspense, useState } from "react";
 import axios from "axios";
-import { motion } from "framer-motion";
+
+const StepOne = lazy(() => import("./StepOne"));
+const StepTwo = lazy(() => import("./StepTwo"));
 
 // Chakra + motion integration
-const MotionBox = motion(Box);
+const MotionBox = lazy(() =>
+    import("framer-motion").then(mod => ({ default: mod.motion(Box) }))
+);
 
 // Define the shape of data coming from Step One
 interface StepOneData {
@@ -77,31 +79,36 @@ export default function RegistrationForm() {
             justify="center"
             px={4}
         >
-            <MotionBox
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.4 }}
-                p={{ base: 4, md: 6 }}
-                maxW={{ base: "100%", md: "500px" }}
-                w="100%"
-                borderRadius="lg"
-                boxShadow="lg"
-                bg="white"
-                _dark={{ bg: "gray.800" }}
-            >
-                <Flex justify="space-between" align="center" mb={6}>
-                    <Heading size="lg">User Registration</Heading>
-                    <IconButton
-                        aria-label="Toggle theme"
-                        icon={colorMode === "light" ? <Moon size={18} /> : <Sun size={18} />}
-                        onClick={toggleColorMode}
-                        variant="ghost"
-                    />
-                </Flex>
+            <Suspense fallback={<Box>Loading...</Box>}>
+                <MotionBox
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.4 }}
+                    p={{ base: 4, md: 6 }}
+                    maxW={{ base: "100%", md: "500px" }}
+                    w="100%"
+                    borderRadius="lg"
+                    boxShadow="lg"
+                    bg="white"
+                    _dark={{ bg: "gray.800" }}
+                >
+                    <Flex justify="space-between" align="center" mb={6}>
+                        <Heading size="lg">User Registration</Heading>
+                        <IconButton
+                            aria-label="Toggle theme"
+                            icon={colorMode === "light" ? <Moon size={18} /> : <Sun size={18} />}
+                            onClick={toggleColorMode}
+                            variant="ghost"
+                        />
+                    </Flex>
 
-                {step === 1 && <StepOne onNext={handleStepOneSubmit} />}
-                {step === 2 && <StepTwo onSubmit={handleFinalSubmit} />}
-            </MotionBox>
+                    <Suspense fallback={null}>
+                        {step === 1 && <StepOne onNext={handleStepOneSubmit} />}
+                        {step === 2 && <StepTwo onSubmit={handleFinalSubmit} />}
+                    </Suspense>
+
+                </MotionBox>
+            </Suspense>
         </Flex>
     );
 }

@@ -1,7 +1,13 @@
 import { Box, Button, FormControl, FormLabel, Input, FormErrorMessage } from "@chakra-ui/react";
-import { motion } from "framer-motion";
 import { useState } from "react";
+import { lazy, Suspense } from "react";
 
+// Lazy load the motion component only when needed
+const MotionImg = lazy(() =>
+    import("framer-motion").then(mod => ({ default: mod.motion.img }))
+);
+
+// Define the shape of the props for StepTwo
 interface Props {
     onSubmit: (avatar: File | null) => void;
 }
@@ -60,14 +66,21 @@ export default function StepTwo({ onSubmit }: Props) {
 
                 {previewUrl && (
                     <Box my={4} display="flex" justifyContent="center">
-                        <motion.img
-                            src={previewUrl}
-                            alt="Preview"
-                            style={{ borderRadius: "8px", maxWidth: "100%", maxHeight: "300px", boxShadow: "var(--chakra-shadows-md)" }}
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.4 }}
-                        />
+                        <Suspense fallback={null}>
+                            <MotionImg
+                                src={previewUrl}
+                                alt="Preview"
+                                style={{
+                                    borderRadius: "8px",
+                                    maxWidth: "100%",
+                                    maxHeight: "300px",
+                                    boxShadow: "var(--chakra-shadows-md)",
+                                }}
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.4 }}
+                            />
+                        </Suspense>
                     </Box>
                 )}
 
