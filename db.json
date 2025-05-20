@@ -32,6 +32,27 @@
         "Technology"
       ],
       "avatar": "drawing.png"
+    },
+    {
+      "id": "a4e0",
+      "name": "Elmir Tanev",
+      "password": "54321чтревя",
+      "confirmPassword": "54321чтревя",
+      "interests": [
+        "Sports"
+      ],
+      "avatar": null
+    },
+    {
+      "id": "9951",
+      "name": "Elmir (Charlie) Tanev",
+      "password": "321`rewq",
+      "confirmPassword": "321`rewq",
+      "interests": [
+        "Sports",
+        "Music"
+      ],
+      "avatar": "drawing.png"
     }
   ]
 }
