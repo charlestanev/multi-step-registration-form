@@ -50,7 +50,6 @@ export default function RegistrationForm() {
             console.log("Submitted: ", formToSend);
             localStorage.setItem("submittedData", JSON.stringify(formToSend));
 
-
             toast({
                 title: "Registration successful!",
                 status: "success",
