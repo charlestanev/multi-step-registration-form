@@ -8,7 +8,6 @@ import {
 } from "@chakra-ui/react";
 import { Moon, Sun } from "lucide-react";
 import { lazy, Suspense, useState } from "react";
-import axios from "axios";
 
 const StepOne = lazy(() => import("./StepOne"));
 const StepTwo = lazy(() => import("./StepTwo"));
@@ -48,7 +47,9 @@ export default function RegistrationForm() {
                 avatar: avatarFile?.name || null, // We only store the avatar filename 
             };
 
-            await axios.post("http://localhost:3001/registrations", formToSend);
+            console.log("Submitted: ", formToSend);
+            localStorage.setItem("submittedData", JSON.stringify(formToSend));
+
 
             toast({
                 title: "Registration successful!",

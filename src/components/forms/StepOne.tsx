@@ -14,7 +14,6 @@ import { useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import axios from 'axios';
 
 // Zod Verification Schema
 const schema = z.object({
@@ -34,7 +33,7 @@ interface Props {
     onNext: (data: FormData) => void;
 }
 
-export default function FormFirstOne({ onNext }: Props) {
+export default function StepOne({ onNext }: Props) {
     const [interestOptions, setInterestOptions] = useState<string[]>([]);
 
     const {
@@ -49,11 +48,15 @@ export default function FormFirstOne({ onNext }: Props) {
     });
 
     useEffect(() => {
-        axios.get('http://localhost:3001/interests')
-            .then((response) => {
-                const names = response.data.map((item: any) => item.name);
+        fetch('/interests.json')
+            .then((res) => res.json())
+            .then((data) => {
+                const names = data.map((item: any) => item.name);
                 setInterestOptions(names);
             })
+            .catch((err) => {
+                console.error("Failed to load interests:", err);
+            });
     }, []);
 
     const selectedInterests = watch('interests') || [];
@@ -101,31 +104,29 @@ export default function FormFirstOne({ onNext }: Props) {
                         name="interests"
                         render={({ field }) => (
                             <CheckboxGroup value={field.value} onChange={field.onChange}>
-                                <div>
-                                    <Stack spacing={2}>
-                                        {interestOptions.map((interest) => (
-                                            <Checkbox
-                                                key={interest}
-                                                value={interest}
-                                                isChecked={field.value?.includes(interest)}
-                                                onChange={(e) => {
-                                                    const checked = e.target.checked;
-                                                    const value = e.target.value;
+                                <Stack spacing={2}>
+                                    {interestOptions.map((interest) => (
+                                        <Checkbox
+                                            key={interest}
+                                            value={interest}
+                                            isChecked={field.value?.includes(interest)}
+                                            onChange={(e) => {
+                                                const checked = e.target.checked;
+                                                const value = e.target.value;
 
-                                                    if (checked) {
-                                                        if (field.value.length < 2) {
-                                                            field.onChange([...field.value, value]);
-                                                        }
-                                                    } else {
-                                                        field.onChange(field.value.filter((v: string) => v !== value));
+                                                if (checked) {
+                                                    if (field.value.length < 2) {
+                                                        field.onChange([...field.value, value]);
                                                     }
-                                                }}
-                                            >
-                                                {interest}
-                                            </Checkbox>
-                                        ))}
-                                    </Stack>
-                                </div>
+                                                } else {
+                                                    field.onChange(field.value.filter((v: string) => v !== value));
+                                                }
+                                            }}
+                                        >
+                                            {interest}
+                                        </Checkbox>
+                                    ))}
+                                </Stack>
                             </CheckboxGroup>
                         )}
                     />
