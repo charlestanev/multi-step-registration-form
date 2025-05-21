@@ -109,6 +109,7 @@ export default function StepOne({ onNext }: Props) {
                                         <Checkbox
                                             key={interest}
                                             value={interest}
+                                            id={`interest-${interest.toLowerCase()}`}
                                             isChecked={field.value?.includes(interest)}
                                             onChange={(e) => {
                                                 const checked = e.target.checked;
