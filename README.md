@@ -1,3 +1,8 @@
+[![Live](https://img.shields.io/badge/Vercel-Live-black?logo=vercel)](https://multi-step-registration-form-sooty.vercel.app/)
+[![React](https://img.shields.io/badge/React-18.x-blue?logo=react)](https://reactjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-4.x-blue?logo=typescript)](https://www.typescriptlang.org/)
+[![Chakra UI](https://img.shields.io/badge/Chakra--UI-2.x-teal?logo=chakraui)](https://chakra-ui.com/)
+
 # User Registration Form (Multi-step)
 
 A clean and modern multi-step user registration form built with **React**, **TypeScript**, and **Chakra UI**. This app demonstrates validation, step navigation, theme toggling, animations, and form submission.
@@ -66,18 +71,18 @@ npm run server
 ## Folder Structure
 
 ```
-public/ 
-  interests.json          # Static interests list 
+public/
+  interests.json          # Static interests list
   favicon.ico, *.png      # Favicon and PWA icons
 
-src/ 
-  components/ 
-    forms/                # StepOne.tsx, StepTwo.tsx, RegistrationForm.tsx 
-    ui/                   # Chakra UI theme setup 
-  pages/ 
-    NotFound.tsx          # 404 fallback page 
-  types/                  # TypeScript interfaces (optional) 
-  main.tsx                # Entry point 
+src/
+  components/
+    forms/                # StepOne.tsx, StepTwo.tsx, RegistrationForm.tsx
+    ui/                   # Chakra UI theme setup
+  pages/
+    NotFound.tsx          # 404 fallback page
+  types/                  # TypeScript interfaces (optional)
+  main.tsx                # Entry point
   App.tsx                 # Main app wrapper
 
 db.json                   # Mock data for local testing
@@ -99,8 +104,15 @@ vite.config.ts            # Vite config
 - [x] Animated transitions with Framer Motion
 - [x] Responsive design + 404 fallback
 - [x] Deployed publicly on Vercel
+
 ---
 
-## 📃 License
+## Used in
+
+- Job task for Front-End Developer @ Blackdeep Technologies
+
+---
+
+## License
 
 MIT — free to use and modify.
